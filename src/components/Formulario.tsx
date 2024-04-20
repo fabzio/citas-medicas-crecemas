@@ -17,22 +17,40 @@ import { z } from "zod";
 import moment, { Moment } from "moment";
 
 const schema = z.object({
-  nombre: z.string().trim().min(1, { message: "El nombre es requerido" }),
+  nombre: z
+    .string({
+      required_error: "El nombre es requerido",
+    })
+    .trim()
+    .min(1),
   fecha: z.custom((value) => {
     if (!value || !moment(value as Moment).isValid()) {
       return false;
     }
     return true;
-  }),
-  dni: z.string().length(8),
+  }, "La fecha es requerida"),
+  dni: z
+    .string({
+      required_error: "El documento de identidad es requerido",
+    })
+    .length(8),
   hora: z.custom((value) => {
     if (!value || !moment(value as Moment).isValid()) {
       return false;
     }
     return true;
-  }),
-  sintomas: z.string().trim().min(1),
-  genero: z.string().min(1),
+  }, "La hora es requerida"),
+  sintomas: z
+    .string({
+      required_error: "Los síntomas son requeridos",
+    })
+    .trim()
+    .min(1),
+  genero: z
+    .string({
+      required_error: "El género es requerido",
+    })
+    .min(1),
 });
 
 export default function Formulario() {
