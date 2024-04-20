@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import formSchema from "./formSchema";
 
@@ -21,8 +21,12 @@ export default function Formulario() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({ mode: "onSubmit", resolver: zodResolver(formSchema) });
-
+  } = useForm<Cita>({ mode: "onSubmit", resolver: zodResolver(formSchema) });
+  const onSubmit: SubmitHandler<Cita> = (data) => {
+    data.fecha = moment(data.fecha).format("YYYY-MM-DD");
+    data.hora = moment(data.hora).format("HH:mm:ss");
+    console.log(data);
+  };
   return (
     <>
       <Paper
@@ -42,13 +46,7 @@ export default function Formulario() {
         >
           Hacer una cita
         </Typography>
-        <form
-          onSubmit={handleSubmit((data) => {
-            data.fecha = moment(data.fecha).format("YYYY-MM-DD");
-            data.hora = moment(data.hora).format("HH:mm:ss");
-            console.log(data);
-          })}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={6}>
               <Controller
