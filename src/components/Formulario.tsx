@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Autocomplete,
   Button,
+  FormControl,
+  FormHelperText,
   Grid,
+  InputLabel,
   MenuItem,
   Paper,
   Select,
@@ -12,13 +14,24 @@ import {
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import moment, { Moment } from "moment";
 
 const schema = z.object({
-  nombre: z.string().min(1),
-  fecha: z.date(),
+  nombre: z.string().trim().min(1, { message: "El nombre es requerido" }),
+  fecha: z.custom((value) => {
+    if (!value || !moment(value as Moment).isValid()) {
+      return false;
+    }
+    return true;
+  }),
   dni: z.string().length(8),
-  hora: z.string().datetime(),
-  sintomas: z.string().min(1),
+  hora: z.custom((value) => {
+    if (!value || !moment(value as Moment).isValid()) {
+      return false;
+    }
+    return true;
+  }),
+  sintomas: z.string().trim().min(1),
   genero: z.string().min(1),
 });
 
@@ -27,7 +40,7 @@ export default function Formulario() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({ mode: "onTouched", resolver: zodResolver(schema) });
+  } = useForm({ mode: "onSubmit", resolver: zodResolver(schema) });
 
   return (
     <>
@@ -48,7 +61,13 @@ export default function Formulario() {
         >
           Hacer una cita
         </Typography>
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form
+          onSubmit={handleSubmit((data) => {
+            data.fecha = moment(data.fecha).format("YYYY-MM-DD");
+            data.hora = moment(data.hora).format("HH:mm:ss");
+            console.log(data);
+          })}
+        >
           <Grid container spacing={1}>
             <Grid item xs={12} md={6}>
               <Controller
@@ -71,9 +90,18 @@ export default function Formulario() {
                 control={control}
                 render={({ field }) => (
                   <DatePicker
+                    disablePast
                     label="Seleccionar fecha"
+                    value={field.value}
+                    onChange={field.onChange}
                     sx={{
                       width: "100%",
+                    }}
+                    slotProps={{
+                      textField: {
+                        helperText: errors.fecha?.message,
+                        error: !!errors.fecha,
+                      },
                     }}
                   />
                 )}
@@ -105,6 +133,14 @@ export default function Formulario() {
                       width: "100%",
                     }}
                     label="Hora"
+                    value={field.value}
+                    onChange={field.onChange}
+                    slotProps={{
+                      textField: {
+                        helperText: errors.hora?.message,
+                        error: !!errors.hora,
+                      },
+                    }}
                   />
                 )}
               />
@@ -128,25 +164,29 @@ export default function Formulario() {
               <Controller
                 name="genero"
                 control={control}
-                render={({ field }) => (
-                  <Autocomplete
-                    options={["Masculino", "Femenino"]}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Género"
-                        error={!!errors.genero}
-                        helperText={errors.genero?.message}
-                        fullWidth
-                      />
-                    )}
-                    {...field}
-                  />
-                )}
+                render={({ field }) => {
+                  return (
+                    <FormControl fullWidth error={!!errors.genero}>
+                      <InputLabel>Género</InputLabel>
+                      <Select label="Género" {...field}>
+                        <MenuItem value="hombre">Hombre</MenuItem>
+                        <MenuItem value="mujer">Mujer</MenuItem>
+                      </Select>
+                      <FormHelperText>{errors.genero?.message}</FormHelperText>
+                    </FormControl>
+                  );
+                }}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" fullWidth>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Button type="submit" variant="contained">
                 Enviar
               </Button>
             </Grid>
