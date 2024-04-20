@@ -168,7 +168,7 @@ export default function Formulario() {
               }}
             >
               <Button type="submit" variant="contained">
-                Enviar
+                Agendar Cita
               </Button>
             </Grid>
           </Grid>
