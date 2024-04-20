@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import Formulario from "./components/Formulario";
+import Formulario from "./components/Formulario/Formulario";
 import ListaCitas from "./components/ListaCitas";
 
 export function App() {
