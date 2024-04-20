@@ -12,7 +12,7 @@ export function App() {
           sx={{
             my: 2,
             fontSize: { md: "2.5rem", xs: "1.5rem" },
-            textDecoration: "upper",
+            textTransform: "uppercase",
           }}
         >
           Formulario de citas médicas
