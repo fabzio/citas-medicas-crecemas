@@ -34,7 +34,9 @@ export default function FiltersButton({ filter, setFilter }: Props) {
       }}
     >
       <Button onClick={handleViewFilter}>
-        <Typography variant="button">Ver filtros</Typography>
+        <Typography variant="button">
+          {filtersVisible ? "Ocultar filtros" : "Ver filtros"}
+        </Typography>
       </Button>
       {filtersVisible && (
         <Stack
