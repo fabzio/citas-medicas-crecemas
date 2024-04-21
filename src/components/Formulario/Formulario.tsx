@@ -15,6 +15,7 @@ import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import formSchema from "./formSchema";
+import useCitasStore from "../../hooks/useCitasStore";
 
 export default function Formulario() {
   const {
@@ -22,10 +23,13 @@ export default function Formulario() {
     control,
     formState: { errors },
   } = useForm<Cita>({ mode: "onSubmit", resolver: zodResolver(formSchema) });
+  const { addCita } = useCitasStore();
+
   const onSubmit: SubmitHandler<Cita> = (data) => {
     data.fecha = moment(data.fecha).format("YYYY-MM-DD");
     data.hora = moment(data.hora).format("HH:mm:ss");
-    console.log(data);
+    data._id = crypto.randomUUID();
+    addCita(data);
   };
   return (
     <>
