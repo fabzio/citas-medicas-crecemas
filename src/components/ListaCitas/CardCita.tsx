@@ -26,6 +26,12 @@ export default function CardCita({ cita }: { cita: Cita }) {
           sx={{
             color: "#f9f9f9",
             fontSize: { md: "1.5rem", xs: "1.2rem" },
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            minHeight: "3.6em",
           }}
         >
           {cita.nombre}
