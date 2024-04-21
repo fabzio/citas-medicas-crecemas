@@ -26,15 +26,23 @@ const citasStore = create<CitaState>()(
           });
         if (!isDuplicated) {
           set((state) => ({ citas: [...state.citas, cita] }));
-          toast.success("Cita agregada correctamente");
+          toast.success("Cita agregada correctamente", {
+            position: "top-right",
+          });
         } else {
-          toast.error("La cita ya existe");
+          toast.error("La cita ya existe", {
+            position: "top-right",
+          });
         }
       },
-      removeCita: (id) =>
+      removeCita: (id) => {
         set((state) => ({
           citas: state.citas.filter((cita) => cita._id !== id),
         })),
+          toast.success("Cita eliminada correctamente", {
+            position: "top-right",
+          });
+      },
     }),
     {
       name: "citas-storage",

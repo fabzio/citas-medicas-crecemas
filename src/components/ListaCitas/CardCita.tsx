@@ -9,6 +9,7 @@ import {
 import useCitasStore from "../../hooks/useCitasStore";
 import getGenero from "../utils/getGenero";
 import { type Cita } from "../../interfaces/Cita";
+import moment from "moment";
 
 export default function CardCita({ cita }: { cita: Cita }) {
   const { removeCita } = useCitasStore();
@@ -54,13 +55,13 @@ export default function CardCita({ cita }: { cita: Cita }) {
           />
           <TextField
             label="Fecha"
-            value={cita.fecha?.format("DD-MM-YYYY")}
+            value={moment(cita.fecha).format("DD-MM-YYYY")}
             fullWidth
             disabled
           />
           <TextField
             label="Hora"
-            value={cita.hora?.format("HH:mm")}
+            value={moment(cita.hora).format("HH:mm")}
             fullWidth
             disabled
           />
