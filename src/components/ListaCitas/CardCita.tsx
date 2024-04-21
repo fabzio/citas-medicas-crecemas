@@ -6,9 +6,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import useCitasStore from "../../hooks/useCitasStore";
-import getGenero from "../utils/getGenero";
-import { type Cita } from "../../interfaces/Cita";
+import useCitasStore from "@/hooks/useCitasStore";
+import getGenero from "@/utils/getGenero";
+import { type Cita } from "@/interfaces/Cita";
 import moment from "moment";
 
 export default function CardCita({ cita }: { cita: Cita }) {
