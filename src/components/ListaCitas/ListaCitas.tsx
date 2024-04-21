@@ -6,16 +6,18 @@ import { useState } from "preact/hooks";
 import { Filter } from "@/interfaces/Filter";
 import filterCitas from "@/utils/filterCitas";
 
+const filters = {
+  dni: "",
+  nombre: "",
+  sintomas: "",
+  genero: "",
+  fechaInicio: null,
+  fechaFin: null,
+};
+
 export default function ListaCitas() {
   const { citas } = useCitasStore();
-  const filters = {
-    dni: "",
-    nombre: "",
-    sintomas: "",
-    genero: "",
-    fechaInicio: null,
-    fechaFin: null,
-  };
+
   const [filter, setFilter] = useState<Filter>(filters);
   const [page, setPage] = useState(1);
   const filteredCitas = filterCitas(citas, filter);
