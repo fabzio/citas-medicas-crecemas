@@ -62,7 +62,7 @@ export default function Formulario() {
           Hacer una cita
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={1}>
+          <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <Controller
                 name="nombre"
