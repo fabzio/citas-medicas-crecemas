@@ -37,7 +37,13 @@ export default function FiltersButton({ filter, setFilter }: Props) {
         <Typography variant="button">Ver filtros</Typography>
       </Button>
       {filtersVisible && (
-        <Stack direction="row" spacing={1}>
+        <Stack
+          direction={{
+            xs: "column",
+            md: "row",
+          }}
+          spacing={1}
+        >
           <TextField
             label="DNI"
             name="dni"
