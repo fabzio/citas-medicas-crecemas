@@ -1,5 +1,13 @@
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import useCitasStore from "../../hooks/useCitasStore";
+import getGenero from "../utils/getGenero";
 
 export default function CardCita({ cita }: { cita: Cita }) {
   const { removeCita } = useCitasStore();
@@ -26,21 +34,29 @@ export default function CardCita({ cita }: { cita: Cita }) {
             fontSize: { md: "1.2rem", xs: "1rem" },
           }}
         >
-          {cita.fecha} - {cita.hora}
+          DNI: {cita.dni}
         </Typography>
-        <Typography
-          sx={{
-            color: "#f9f9f9",
-            fontSize: { md: "1rem", xs: "0.9rem" },
-          }}
-        >
-          {cita.sintomas}
-        </Typography>
+        <Stack direction="column" spacing={2} mt={2}>
+          <TextField
+            label="Síntomas"
+            value={cita.sintomas}
+            multiline
+            fullWidth
+            disabled
+          />
+
+          <TextField
+            label="Género"
+            value={getGenero(cita.genero)}
+            fullWidth
+            disabled
+          />
+          <TextField label="Fecha" value={cita.fecha} fullWidth disabled />
+          <TextField label="Hora" value={cita.hora} fullWidth disabled />
+        </Stack>
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#f9f9f9",
-            color: "#485361",
             mt: 2,
           }}
           onClick={() => removeCita(cita._id)}

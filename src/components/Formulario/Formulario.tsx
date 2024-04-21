@@ -165,8 +165,8 @@ export default function Formulario() {
                     <FormControl fullWidth error={!!errors.genero}>
                       <InputLabel>Género</InputLabel>
                       <Select label="Género" {...field}>
-                        <MenuItem value="hombre">Hombre</MenuItem>
-                        <MenuItem value="mujer">Mujer</MenuItem>
+                        <MenuItem value="M">Masculino</MenuItem>
+                        <MenuItem value="F">Femenino</MenuItem>
                       </Select>
                       <FormHelperText>{errors.genero?.message}</FormHelperText>
                     </FormControl>
