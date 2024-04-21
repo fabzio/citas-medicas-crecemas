@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import useCitasStore from "../../hooks/useCitasStore";
 import getGenero from "../utils/getGenero";
+import { type Cita } from "../../interfaces/Cita";
 
 export default function CardCita({ cita }: { cita: Cita }) {
   const { removeCita } = useCitasStore();
@@ -51,8 +52,18 @@ export default function CardCita({ cita }: { cita: Cita }) {
             fullWidth
             disabled
           />
-          <TextField label="Fecha" value={cita.fecha} fullWidth disabled />
-          <TextField label="Hora" value={cita.hora} fullWidth disabled />
+          <TextField
+            label="Fecha"
+            value={cita.fecha?.format("DD-MM-YYYY")}
+            fullWidth
+            disabled
+          />
+          <TextField
+            label="Hora"
+            value={cita.hora?.format("HH:mm")}
+            fullWidth
+            disabled
+          />
         </Stack>
         <Button
           variant="contained"

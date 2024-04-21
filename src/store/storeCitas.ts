@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { toast } from "react-hot-toast";
+import { type Cita } from "../interfaces/Cita";
 
 interface CitaState {
   citas: Cita[];

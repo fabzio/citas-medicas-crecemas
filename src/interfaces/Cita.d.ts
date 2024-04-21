@@ -1,9 +1,11 @@
-interface Cita {
+import { Moment } from "moment";
+
+export interface Cita {
   _id: string;
   nombre: string;
   dni: string;
-  fecha: string | null;
-  hora: string | null;
+  fecha: Moment | null;
+  hora: Moment | null;
   sintomas: string;
   genero: string;
 }
