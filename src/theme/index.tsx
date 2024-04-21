@@ -15,7 +15,7 @@ export default function ThemeProvider({
     palette,
   };
   const theme = createTheme(themeOptions);
-  theme.components = componentsOverrrides(theme);
+  theme.components = componentsOverrrides();
 
   return (
     <MUIThemeProvider theme={theme}>

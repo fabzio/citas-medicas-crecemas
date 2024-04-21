@@ -161,7 +161,14 @@ export default function Formulario() {
                 render={({ field }) => {
                   return (
                     <FormControl fullWidth error={!!errors.genero}>
-                      <InputLabel>Género</InputLabel>
+                      <InputLabel
+                        sx={{
+                          backgroundColor: "#f9f9f9",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Género
+                      </InputLabel>
                       <Select label="Género" {...field}>
                         <MenuItem value="M">Masculino</MenuItem>
                         <MenuItem value="F">Femenino</MenuItem>
