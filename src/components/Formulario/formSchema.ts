@@ -7,7 +7,9 @@ const schema = z.object({
       required_error: "El nombre es requerido",
     })
     .trim()
-    .min(1),
+    .min(1, {
+      message: "El nombre es requerido",
+    }),
   fecha: z.custom((value) => {
     if (!value || !moment(value as Moment).isValid()) {
       return false;
@@ -18,7 +20,9 @@ const schema = z.object({
     .string({
       required_error: "El documento de identidad es requerido",
     })
-    .length(8),
+    .length(8, {
+      message: "El documento de identidad debe tener 8 dígitos",
+    }),
   hora: z.custom((value) => {
     if (!value || !moment(value as Moment).isValid()) {
       return false;
@@ -30,12 +34,16 @@ const schema = z.object({
       required_error: "Los síntomas son requeridos",
     })
     .trim()
-    .min(1),
+    .min(1, {
+      message: "Los síntomas son requeridos",
+    }),
   genero: z
     .string({
       required_error: "El género es requerido",
     })
-    .min(1),
+    .min(1, {
+      message: "El género es requerido",
+    }),
 });
 
 export default schema;

@@ -24,7 +24,7 @@ export default function Formulario() {
     reset,
     formState: { errors, isValid, isDirty },
   } = useForm<Cita>({
-    mode: "onSubmit",
+    mode: "onTouched",
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombre: "",
