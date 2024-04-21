@@ -1,6 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import Formulario from "./components/Formulario/Formulario";
 import ListaCitas from "./components/ListaCitas";
+import { Toaster } from "react-hot-toast";
 
 export function App() {
   return (
@@ -19,6 +20,7 @@ export function App() {
         </Typography>
         <Formulario />
         <ListaCitas />
+        <Toaster />
       </Container>
     </>
   );
