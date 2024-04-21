@@ -6,6 +6,9 @@ const schema = z.object({
     .string({
       required_error: "El nombre es requerido",
     })
+    .regex(/^[a-zA-Z\u00C0-\u024F\s]+$/, {
+      message: "El nombre solo puede contener letras",
+    })
     .trim()
     .min(1, {
       message: "El nombre es requerido",
@@ -19,6 +22,9 @@ const schema = z.object({
   dni: z
     .string({
       required_error: "El documento de identidad es requerido",
+    })
+    .regex(/^\d+$/, {
+      message: "El documento de identidad debe ser numérico",
     })
     .length(8, {
       message: "El documento de identidad debe tener 8 dígitos",
