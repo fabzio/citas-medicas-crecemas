@@ -21,8 +21,20 @@ export default function Formulario() {
   const {
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm<Cita>({ mode: "onSubmit", resolver: zodResolver(formSchema) });
+    reset,
+    formState: { errors, isValid, isDirty },
+  } = useForm<Cita>({
+    mode: "onSubmit",
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      nombre: "",
+      fecha: null,
+      dni: "",
+      hora: null,
+      sintomas: "",
+      genero: "",
+    },
+  });
   const { addCita } = useCitasStore();
 
   const onSubmit: SubmitHandler<Cita> = (data) => {
@@ -30,6 +42,7 @@ export default function Formulario() {
     data.hora = moment(data.hora).format("HH:mm:ss");
     data._id = crypto.randomUUID();
     addCita(data);
+    reset();
   };
   return (
     <>
@@ -169,7 +182,11 @@ export default function Formulario() {
                 justifyContent: "center",
               }}
             >
-              <Button type="submit" variant="contained">
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={!isValid || !isDirty}
+              >
                 Agendar Cita
               </Button>
             </Grid>
