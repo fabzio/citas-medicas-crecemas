@@ -16,6 +16,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import formSchema from "./formSchema";
 import useCitasStore from "../../hooks/useCitasStore";
 import { type Cita } from "../../interfaces/Cita";
+import ButtonCarga from "../Carga/ButtonCarga";
 
 export default function Formulario() {
   const {
@@ -48,6 +49,7 @@ export default function Formulario() {
         sx={{
           backgroundColor: "#485361",
           p: 2,
+          position: "relative",
         }}
       >
         <Typography
@@ -61,6 +63,8 @@ export default function Formulario() {
         >
           Hacer una cita
         </Typography>
+        <ButtonCarga />
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
