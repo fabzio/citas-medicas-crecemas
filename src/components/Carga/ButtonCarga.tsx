@@ -14,8 +14,8 @@ export default function ButtonCarga() {
         onClick={handleClick}
         sx={{
           position: "absolute",
-          top: "1rem",
-          right: "1rem",
+          top: { xs: "0.6rem", md: "1rem" },
+          right: { xs: "0.6rem", md: "1rem" },
         }}
       >
         Cargar citas

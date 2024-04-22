@@ -54,7 +54,7 @@ export default function Formulario() {
       >
         <Typography
           sx={{
-            my: 2,
+            my: { xs: 4, md: 2 },
             color: "#f9f9f9",
             fontSize: { md: "2rem", xs: "1.3rem" },
             textTransform: "uppercase",
