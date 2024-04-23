@@ -21,7 +21,11 @@ export default function ListaCitas() {
   const [filter, setFilter] = useState<Filter>(filters);
   const [page, setPage] = useState(1);
   const filteredCitas = filterCitas(citas, filter);
-  const paginatedCitas = filteredCitas.slice((page - 1) * 6, page * 6);
+  const paginatedCitas =
+    filteredCitas.length > 6
+      ? filteredCitas.slice((page - 1) * 6, page * 6)
+      : filteredCitas;
+
   return (
     <Container>
       {citas.length > 0 && (
