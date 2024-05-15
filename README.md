@@ -1,7 +1,6 @@
 # Aplicación para citas médicas
 
 Aplicación web de registro de citas usando Vite + Preact, una alternativa ligera a react con las mismas características.
-![alt text](https://aws-general1.s3.amazonaws.com/Screenshot+2024-04-22+at+00-32-24+Citas+M%C3%A9dicas+CreceM%C3%A1s.png)
 
 ## Clona el repositorio
 
